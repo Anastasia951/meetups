@@ -1,0 +1,42 @@
+.form__create-meetup {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px 0;
+  &__title {
+    text-align: center;
+    padding: 10px;
+  }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  &__submit {
+    background-color: rgb(156, 157, 247);
+    &:hover {
+      background-color: rgb(100, 102, 250);
+    }
+    color: white;
+    width: 100%;
+    padding: 15px 0;
+    margin-bottom: 20px;
+  }
+  span {
+    color: rgb(156, 157, 247);
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+.form__cancel {
+  border: 5px solid rgb(156, 157, 247);
+  background-color: inherit;
+  color: rgb(156, 157, 247);
+  margin-bottom: 10px;
+  width: 100%;
+  padding: 15px 0;
+  &:hover {
+    border-color: rgb(100, 102, 250);
+  }
+}

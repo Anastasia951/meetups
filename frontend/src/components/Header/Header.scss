@@ -1,0 +1,39 @@
+.header {
+  background-color: white;
+  &__title {
+    text-align: center;
+    padding: 30px 0;
+    font-size: 2.2rem;
+    text-transform: uppercase;
+  }
+  &__list {
+    padding: 0 10px 20px 10px;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    margin: 0 auto;
+  }
+  &__item {
+    position: relative;
+    padding: 0 10px;
+    &:first-child {
+      &::before {
+        display: none;
+      }
+    }
+    &::before {
+      content: '';
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background-color: #ccc;
+      left: -2px;
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    &:hover {
+      color: rgb(156, 157, 247);
+    }
+  }
+}

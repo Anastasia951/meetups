@@ -1,0 +1,79 @@
+@import-normalize;
+body {
+  font-size: 20px;
+  color: #333333;
+  background-color: rgb(241, 241, 241);
+}
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+}
+html,
+body,
+#root {
+  min-height: 100vh;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  transition: all 0.1s linear;
+}
+#root {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+input,
+textarea {
+  font: inherit;
+  background: none;
+  border: none;
+}
+input:focus {
+  outline: none;
+}
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+.main {
+  padding: 20px;
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+button {
+  border: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+input,
+textarea {
+  background-color: white;
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  outline: 2px solid rgb(156, 157, 247);
+  font-weight: 600;
+}
+
+._ibg {
+  position: relative;
+}
+._ibg img {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

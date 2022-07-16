@@ -1,0 +1,34 @@
+input {
+  background: white;
+}
+.filters {
+  padding: 1em 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1em;
+  ul {
+    display: flex;
+    gap: 0.5em;
+    li {
+      cursor: pointer;
+      padding: 0.25em;
+      border-radius: 15px;
+      color: rgb(100, 102, 250);
+      &.active {
+        border: 2px solid rgb(100, 102, 250);
+      }
+    }
+  }
+  form {
+    display: flex;
+    align-items: center;
+    input {
+      padding-left: 40px;
+      border-radius: 20px;
+    }
+    .search-icon {
+      transform: translateX(calc(100% + 10px));
+    }
+  }
+}
