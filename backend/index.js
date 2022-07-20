@@ -2,6 +2,9 @@ import express from 'express'
 import mongoose from 'mongoose'
 import dotenv from "dotenv"
 import { createMeetup, getAllMeetups } from './controllers/MeetupController.js'
+import { login, register } from './controllers/UserController.js'
+import { loginValidator, registerValidator } from './validators/index.js'
+import { checkErrors } from './utils/checkErrors.js'
 
 dotenv.config()
 
@@ -12,8 +15,12 @@ mongoose.connect(process.env.API_URL).then(() => {
 
 const app = express()
 app.use(express.json())
+
 app.get('/meetups', getAllMeetups)
 app.post('/create-meetup', createMeetup)
+
+app.post('/register', registerValidator, checkErrors, register)
+app.post('/login', loginValidator, checkErrors, login)
 app.listen(5000, () => {
   console.log('Worked')
 })
