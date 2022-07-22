@@ -8,6 +8,7 @@ export const register = async (req, res) => {
     const { email, name, password } = req.body
     const testUser = await UserModel.findOne({ email })
 
+    console.log(testUser)
     if (testUser) {
       return res.status(400).json({
         message: 'Пользователь уже существует'

@@ -3,10 +3,13 @@ import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { ILogin } from '../../constants/forms'
 import { routes } from '../../constants/routes'
+import { fetchLogin } from '../../redux/slices/authSlice'
+import { useAppDispatch } from '../../redux/store'
 
 import './Login.scss'
 
 const Login = () => {
+  const dispatch = useAppDispatch()
   const {
     register,
     setValue,
@@ -14,8 +17,15 @@ const Login = () => {
     formState: { errors },
   } = useForm<ILogin>()
 
-  const onSubmit = handleSubmit(data => {
-    console.log(data)
+  const onSubmit = handleSubmit(async data => {
+    const result = await dispatch(fetchLogin(data))
+    if (!result) {
+      return alert('Не удалось авторизоваться')
+    }
+
+    if (result.payload.token) {
+      window.localStorage.setItem('token', result.payload.token)
+    }
   })
 
   return (

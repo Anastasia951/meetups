@@ -13,9 +13,10 @@ mongoose.connect(process.env.API_URL).then(() => {
   console.log('Connected to DB')
 })
 
-
 const app = express()
-app.use(cors())
+app.use(cors({
+  origin: '*'
+}))
 app.use(express.json())
 
 app.get('/meetups', getAllMeetups)
