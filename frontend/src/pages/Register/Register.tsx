@@ -3,16 +3,26 @@ import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { IRegister } from '../../constants/forms'
 import { routes } from '../../constants/routes'
+import { fetchRegister } from '../../redux/slices/authSlice'
+import { useAppDispatch } from '../../redux/store'
 
 const Register = () => {
+  const dispatch = useAppDispatch()
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IRegister>()
 
-  const onSubmit = handleSubmit(data => {
-    console.log(data)
+  const onSubmit = handleSubmit(async data => {
+    const result = await dispatch(fetchRegister(data))
+    if (!result) {
+      return alert('Не удалось зарегистрироваться')
+    }
+
+    if (result.payload.token) {
+      window.localStorage.setItem('token', result.payload.token)
+    }
   })
   return (
     <form className='form' onSubmit={onSubmit}>
