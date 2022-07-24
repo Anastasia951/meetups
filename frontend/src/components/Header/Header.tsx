@@ -1,15 +1,28 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { routes } from '../../constants/routes'
-import { selectIsAuth, useAuthSelector } from '../../redux/slices/authSlice'
-
+import {
+  logout,
+  selectIsAuth,
+  useAuthSelector,
+} from '../../redux/slices/authSlice'
+import { useAppDispatch } from '../../redux/store'
 import './Header.scss'
 
 const Header = () => {
+  const dispatch = useAppDispatch()
   const user = useAuthSelector(state => state.auth.user)
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (user && user.token) {
+      return navigate(routes.Home)
+    }
+  }, [user])
 
-  console.log('isAuth', user)
+  const logoutHandler = () => {
+    dispatch(logout())
+    return navigate(routes.Home)
+  }
   return (
     <header className='header'>
       <h1 className='header__title'>
@@ -17,7 +30,22 @@ const Header = () => {
       </h1>
       <nav>
         <ul className='header__list'>
-          {user && user.auth.user.token ? (
+          {user && user.token ? (
+            <>
+              <li className='header__item'>
+                <Link to={routes.MyMeetups}>Мои митапы</Link>
+              </li>
+              <li className='header__item'>
+                <Link to={routes.Organized}>Организуемые митапы</Link>
+              </li>
+              <li className='header__item'>
+                <Link to={routes.CreateMeetup}>Создать митап</Link>
+              </li>
+              <li onClick={logoutHandler} className='header__item'>
+                Выйти
+              </li>
+            </>
+          ) : (
             <>
               <li className='header__item'>
                 <Link to={routes.Login}>Вход</Link>
@@ -27,21 +55,6 @@ const Header = () => {
               </li>
               <li className='header__item'>
                 <Link to={routes.CreateMeetup}>Создать митап</Link>
-              </li>
-            </>
-          ) : (
-            <>
-              <li className='header__item'>
-                <Link to={routes.Login}>Мои митапы</Link>
-              </li>
-              <li className='header__item'>
-                <Link to={routes.Register}>Организуемые митапы</Link>
-              </li>
-              <li className='header__item'>
-                <Link to={routes.Register}>Создать митап</Link>
-              </li>
-              <li className='header__item'>
-                <Link to={routes.Register}>Выйти</Link>
               </li>
             </>
           )}
