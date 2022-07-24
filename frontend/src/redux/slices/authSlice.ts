@@ -1,5 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { TypedUseSelectorHook, useSelector } from 'react-redux'
 import { instance } from '../../axios'
+import { RootState } from '../store'
+
 enum Status {
   Loading = 'loading',
   Loaded = 'loaded',
@@ -57,3 +60,6 @@ const authSlice = createSlice({
 })
 
 export default authSlice.reducer
+
+export const selectIsAuth = state => !!state.auth.data
+export const useAuthSelector: TypedUseSelectorHook<RootState> = useSelector
