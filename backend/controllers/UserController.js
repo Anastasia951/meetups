@@ -8,7 +8,6 @@ export const register = async (req, res) => {
     const { email, name, password } = req.body
     const testUser = await UserModel.findOne({ email })
 
-    console.log(testUser)
     if (testUser) {
       return res.status(400).json({
         message: 'Пользователь уже существует'
@@ -82,6 +81,30 @@ export const login = async (req, res) => {
     console.log(e)
     res.status(500).json({
       message: 'Не удалось авторизоваться'
+    })
+  }
+}
+
+export const fetchMe = async (req, res) => {
+  try {
+    const token = req.headers.authorization || ''
+    if (token) {
+      const testUser = await UserModel.findOne({ token })
+      if (isObjectEmpty(testUser)) {
+        return res.status(404).json({
+          message: 'Пользователь не найден'
+        })
+      }
+
+      const { passwordHash, ...user } = testUser._doc
+      return res.json({
+        user, token
+      })
+    }
+  } catch (e) {
+    console.log(e)
+    res.status(400).json({
+      message: ''
     })
   }
 }

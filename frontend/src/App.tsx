@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import { Footer, Header } from './components'
 import { routes } from './constants/routes'
 import { Login, Register, CreateMeetup, Home } from './pages'
+import { fetchMe } from './redux/slices/authSlice'
 import { fetchAllMeetups } from './redux/slices/meetupsSlice'
 import { useAppDispatch } from './redux/store'
 
@@ -11,6 +12,7 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchAllMeetups())
+    dispatch(fetchMe())
   }, [])
   return (
     <>

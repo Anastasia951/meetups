@@ -17,7 +17,7 @@ const Login = () => {
     formState: { errors },
   } = useForm<ILogin>()
 
-  const onSubmit = handleSubmit(async data => {
+  const onSubmit = handleSubmit(async (data: ILogin) => {
     const result = await dispatch(fetchLogin(data))
     if (!result) {
       return alert('Не удалось авторизоваться')

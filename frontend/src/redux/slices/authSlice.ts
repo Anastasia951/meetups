@@ -27,7 +27,10 @@ export const fetchLogin = createAsyncThunk(
     return data.data
   }
 )
-
+export const fetchMe = createAsyncThunk('user/fetchMe', async () => {
+  const data = await instance.get('/auth/me')
+  return data.data
+})
 const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -59,6 +62,17 @@ const authSlice = createSlice({
         state.user = action.payload
       })
       .addCase(fetchLogin.rejected, state => {
+        state.status = Status.Error
+      })
+      .addCase(fetchMe.pending, state => {
+        state.status = Status.Loading
+        state.user = null
+      })
+      .addCase(fetchMe.fulfilled, (state, action) => {
+        state.status = Status.Loaded
+        state.user = action.payload
+      })
+      .addCase(fetchMe.rejected, state => {
         state.status = Status.Error
       })
   },

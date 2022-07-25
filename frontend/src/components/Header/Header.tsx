@@ -1,11 +1,7 @@
 import React, { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { routes } from '../../constants/routes'
-import {
-  logout,
-  selectIsAuth,
-  useAuthSelector,
-} from '../../redux/slices/authSlice'
+import { logout, useAuthSelector } from '../../redux/slices/authSlice'
 import { useAppDispatch } from '../../redux/store'
 import './Header.scss'
 
@@ -33,7 +29,7 @@ const Header = () => {
           {user && user.token ? (
             <>
               <li className='header__item'>
-                <Link to={routes.MyMeetups}>Мои митапы</Link>
+                <Link to={routes.MyMeetups}>Мои митапы ({user.name})</Link>
               </li>
               <li className='header__item'>
                 <Link to={routes.Organized}>Организуемые митапы</Link>
