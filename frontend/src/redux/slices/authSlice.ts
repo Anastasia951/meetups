@@ -82,4 +82,3 @@ export default authSlice.reducer
 export const { logout } = authSlice.actions
 
 export const selectIsAuth = state => !!state.auth.data
-export const useAuthSelector: TypedUseSelectorHook<RootState> = useSelector

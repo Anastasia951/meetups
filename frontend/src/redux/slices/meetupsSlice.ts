@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import axios from 'axios'
+import { instance } from '../../axios'
 
 enum Status {
   Loading = 'loading',
@@ -14,8 +14,16 @@ const initialState = {
 export const fetchAllMeetups = createAsyncThunk(
   'meetups/fetchAllMeetups',
   async () => {
-    const meetups = await axios.get('http://localhost:5000/meetups')
+    const meetups = await instance.get('/meetups')
     return meetups.data
+  }
+)
+
+export const createMeetup = createAsyncThunk(
+  'meetups/createMeetup',
+  async function (meetup) {
+    const newMeetup = await instance.post('/create-meetup', meetup)
+    return newMeetup.data
   }
 )
 
@@ -39,6 +47,17 @@ const meetupsSlice = createSlice({
       .addCase(fetchAllMeetups.rejected, state => {
         state.status = Status.Error
         state.meetups = []
+      })
+
+      .addCase(createMeetup.pending, state => {
+        state.status = Status.Loading
+      })
+      .addCase(createMeetup.fulfilled, (state, action: PayloadAction<any>) => {
+        state.status = Status.Loaded
+        state.meetups.push(action.payload)
+      })
+      .addCase(createMeetup.rejected, state => {
+        state.status = Status.Error
       })
   },
 })

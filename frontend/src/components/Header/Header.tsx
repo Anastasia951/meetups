@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { routes } from '../../constants/routes'
-import { logout, useAuthSelector } from '../../redux/slices/authSlice'
-import { useAppDispatch } from '../../redux/store'
+import { logout } from '../../redux/slices/authSlice'
+import { useAppDispatch, useTypedSelector } from '../../redux/store'
 import './Header.scss'
 
 const Header = () => {
   const dispatch = useAppDispatch()
-  const user = useAuthSelector(state => state.auth.user)
+  const user = useTypedSelector(state => state.auth.user)
   const navigate = useNavigate()
   useEffect(() => {
     if (user && user.token) {
