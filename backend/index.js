@@ -21,7 +21,7 @@ app.use(cors({
 app.use(express.json())
 
 app.get('/meetups', getAllMeetups)
-app.post('/meetups', createMeetup)
+app.post('/meetups', checkAuthMe, createMeetup)
 
 app.get('/auth/me', checkAuthMe, fetchMe)
 app.post('/register', registerValidator, checkErrors, register)

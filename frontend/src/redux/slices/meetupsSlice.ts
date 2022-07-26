@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { instance } from '../../axios'
 
-enum Status {
+export enum Status {
   Loading = 'loading',
   Loaded = 'loaded',
   Error = 'error',

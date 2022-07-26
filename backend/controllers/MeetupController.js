@@ -2,7 +2,7 @@ import MeetupModel from '../models/Meetup.js'
 
 export const getAllMeetups = async (req, res) => {
   try {
-    const meetups = await MeetupModel.find().populate('User').exec()
+    const meetups = await MeetupModel.find().populate('owner').exec()
     res.json(meetups)
   } catch (e) {
     console.log(e.message)
@@ -12,11 +12,11 @@ export const getAllMeetups = async (req, res) => {
 
 export const createMeetup = async (req, res) => {
   try {
-    let { title, date, place, description, program } = req.body
+    let { title, date, place, description, program, owner } = req.body
     if (!Array.isArray(program) || !program.length) program = []
 
     const newMeetup = new MeetupModel({
-      owner: req.userId,
+      owner,
       title,
       date,
       place,

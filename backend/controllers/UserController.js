@@ -98,7 +98,7 @@ export const fetchMe = async (req, res) => {
 
       const { passwordHash, ...user } = testUser._doc
       return res.json({
-        user, token
+        ...user, token
       })
     }
   } catch (e) {
