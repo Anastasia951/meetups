@@ -1,6 +1,6 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { routes } from '../../constants/routes'
 import { createMeetup } from '../../redux/slices/meetupsSlice'
 import { useAppDispatch, useTypedSelector } from '../../redux/store'
@@ -10,16 +10,18 @@ import './CreateMeetup.scss'
 
 const Login = () => {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const user = useTypedSelector(state => state.auth.user)
-  const {
-    register,
-    setValue,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<any>()
+  const { register, handleSubmit } = useForm<any>()
 
   const onSubmit = handleSubmit(async meetup => {
+    meetup = { ...meetup, owner: user._id }
     const newMeetup = await dispatch(createMeetup(meetup))
+    if (newMeetup) {
+      navigate(routes.Home)
+    } else {
+      alert('Что-то пошло не так')
+    }
   })
   return (
     <form className='form__create-meetup' onSubmit={onSubmit}>

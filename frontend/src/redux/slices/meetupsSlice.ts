@@ -21,8 +21,8 @@ export const fetchAllMeetups = createAsyncThunk(
 
 export const createMeetup = createAsyncThunk(
   'meetups/createMeetup',
-  async function (meetup) {
-    const newMeetup = await instance.post('/create-meetup', meetup)
+  async (meetup: any) => {
+    const newMeetup = await instance.post('/meetups', meetup)
     return newMeetup.data
   }
 )
