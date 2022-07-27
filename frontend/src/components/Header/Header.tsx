@@ -49,9 +49,6 @@ const Header = () => {
               <li className='header__item'>
                 <Link to={routes.Register}>Регистрация</Link>
               </li>
-              <li className='header__item'>
-                <Link to={routes.CreateMeetup}>Создать митап</Link>
-              </li>
             </>
           )}
         </ul>
@@ -60,4 +57,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default React.memo(Header)

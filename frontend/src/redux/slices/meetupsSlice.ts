@@ -19,6 +19,16 @@ export const fetchAllMeetups = createAsyncThunk(
   }
 )
 
+export const fetchMeetupById = createAsyncThunk(
+  'meetups/fetchMeetupById',
+  async function (id: string) {
+    const meetup = await instance.get('/meetup', {
+      params: { id },
+    })
+    return meetup.data
+  }
+)
+
 export const createMeetup = createAsyncThunk(
   'meetups/createMeetup',
   async (meetup: any) => {

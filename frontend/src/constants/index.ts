@@ -1,5 +1,5 @@
 export interface IMeetup {
-  owner: string
+  owner: IUser
   title: string
   date: string
   place: string

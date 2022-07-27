@@ -14,7 +14,7 @@ const Header = () => {
   return (
     <section className='meetups'>
       {meetups.map(meetup => (
-        <MeetupUI meetup={meetup} />
+        <MeetupUI key={meetup._id} meetup={meetup} />
       ))}
     </section>
   )

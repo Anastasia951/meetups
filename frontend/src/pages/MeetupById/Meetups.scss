@@ -1,12 +1,11 @@
-.meetup {
+.meetup-nogrid {
   cursor: pointer;
-  display: grid;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-  grid-template-columns: 1fr 1fr;
   &:hover {
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
   }
   &__image {
+    min-height: 300px;
     img {
       filter: brightness(0.5);
     }

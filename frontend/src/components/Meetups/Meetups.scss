@@ -4,37 +4,3 @@
   grid-auto-rows: 1fr;
   gap: 1.5em;
 }
-.meetup {
-  cursor: pointer;
-  display: grid;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-  grid-template-columns: 1fr 1fr;
-  &:hover {
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
-  }
-  &__image {
-    img {
-      filter: brightness(0.5);
-    }
-  }
-  &__title {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    font-size: 2em;
-    font-weight: 700;
-    transform: translate(-50%, -50%);
-    color: white;
-  }
-  &__info {
-    border-left: 3px solid rgb(100, 102, 250);
-    background-color: white;
-    padding: 1.5em;
-    li {
-      margin-bottom: 0.5em;
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-  }
-}

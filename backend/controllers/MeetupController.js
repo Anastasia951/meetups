@@ -9,6 +9,17 @@ export const getAllMeetups = async (req, res) => {
     res.status(400).json(e)
   }
 }
+export const getMeetupById = async (req, res) => {
+  try {
+    const { id } = req.query
+    const meetup = await MeetupModel.findById(id).populate('owner').exec()
+    console.log(meetup)
+    res.json(meetup)
+  } catch (e) {
+    console.log(e.message)
+    res.status(400).json(e)
+  }
+}
 
 export const createMeetup = async (req, res) => {
   try {

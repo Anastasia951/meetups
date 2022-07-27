@@ -1,8 +1,14 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import { routes } from '../../constants/routes'
 import './Meetups.scss'
 const MeetupUI = ({ meetup }) => {
+  const navigate = useNavigate()
+  const openMeetup = () => {
+    navigate(`${routes.MeetupById}/${meetup._id}`)
+  }
   return (
-    <div className='meetup' key={meetup._id}>
+    <div className='meetup' key={meetup._id} onClick={openMeetup}>
       <div className='meetup__image _ibg'>
         <img
           src='https://images.unsplash.com/photo-1588315029754-2dd089d39a1a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80'
