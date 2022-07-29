@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { instance } from '../../axios'
+import { IMeetup } from '../../constants'
 
 export enum Status {
   Loading = 'loading',
@@ -9,6 +10,7 @@ export enum Status {
 const initialState = {
   status: Status.Loading,
   meetups: [],
+  searchField: '',
 }
 
 export const fetchAllMeetups = createAsyncThunk(
@@ -40,7 +42,11 @@ export const createMeetup = createAsyncThunk(
 const meetupsSlice = createSlice({
   name: 'meetups',
   initialState,
-  reducers: {},
+  reducers: {
+    setSearchField: (state, { payload }: PayloadAction<string>) => {
+      state.searchField = payload
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(fetchAllMeetups.pending, state => {
@@ -49,7 +55,7 @@ const meetupsSlice = createSlice({
       })
       .addCase(
         fetchAllMeetups.fulfilled,
-        (state, action: PayloadAction<any>) => {
+        (state, action: PayloadAction<IMeetup[]>) => {
           state.status = Status.Loaded
           state.meetups = action.payload
         }
@@ -72,4 +78,5 @@ const meetupsSlice = createSlice({
   },
 })
 
+export const { setSearchField } = meetupsSlice.actions
 export default meetupsSlice.reducer

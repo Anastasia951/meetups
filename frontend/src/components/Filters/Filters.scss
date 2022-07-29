@@ -20,15 +20,5 @@ input {
       }
     }
   }
-  form {
-    display: flex;
-    align-items: center;
-    input {
-      padding-left: 40px;
-      border-radius: 20px;
-    }
-    .search-icon {
-      transform: translateX(calc(100% + 10px));
-    }
-  }
+
 }

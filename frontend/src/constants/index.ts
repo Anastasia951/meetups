@@ -4,13 +4,6 @@ export interface IMeetup {
   date: string
   place: string
   description: string
-  program: [
-    meaning: string,
-    beginsAt: string,
-    endsAt: string,
-    title: string,
-    description: string
-  ]
 }
 
 export interface IUser {

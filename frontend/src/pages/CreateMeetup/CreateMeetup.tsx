@@ -29,23 +29,23 @@ const Login = () => {
         <h2 className='form__title'>Создание митапа</h2>
         <div className='field'>
           <label>Название</label>
-          <input {...register('title')} type='text' />
+          <input {...register('title', { required: true })} type='text' />
         </div>
         <div className='field'>
           <label>Дата</label>
           <input
-            {...register('date')}
+            {...register('date', { required: true })}
             type='date'
             defaultValue={getCurrentDate()}
           />
         </div>
         <div className='field'>
           <label>Место проведения</label>
-          <input {...register('place')} type='text' />
+          <input {...register('place', { required: true })} type='text' />
         </div>
         <div className='field'>
           <label>Описание</label>
-          <textarea {...register('description')} rows={6} />
+          <textarea {...register('description', { required: true })} rows={6} />
         </div>
       </div>
       <div className='actions'>

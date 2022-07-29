@@ -1,16 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import { fetchAllMeetups } from '../../redux/slices/meetupsSlice'
-import { useAppDispatch } from '../../redux/store'
+import { useAppDispatch, useTypedSelector } from '../../redux/store'
 import MeetupUI from '../MeetupUI/MeetupUI'
 
 import './Meetups.scss'
 
 const Header = () => {
+  const searchField = useTypedSelector(state => state.meetups.searchField)
   const dispatch = useAppDispatch()
+  const allMeetups = useTypedSelector(state => state.meetups.meetups)
   const [meetups, setMeetups] = useState([])
   useEffect(() => {
-    dispatch(fetchAllMeetups()).then(result => setMeetups(result.payload))
+    const getAllMeetups = async () => {
+      const meetups = await dispatch(fetchAllMeetups())
+      setMeetups(meetups.payload)
+    }
+    getAllMeetups()
   }, [])
+
+  useEffect(() => {
+    if (searchField) {
+      setMeetups(
+        allMeetups.filter(meetup => meetup.title.includes(searchField))
+      )
+    } else {
+      setMeetups(allMeetups)
+    }
+  }, [searchField])
   return (
     <section className='meetups'>
       {meetups.map(meetup => (

@@ -2,18 +2,26 @@ import React, { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { routes } from '../../constants/routes'
 import { logout } from '../../redux/slices/authSlice'
-import { useAppDispatch, useTypedSelector } from '../../redux/store'
+import {
+  getUserName,
+  isUserAuthenticated,
+  useAppDispatch,
+  useTypedSelector,
+} from '../../redux/store'
 import './Header.scss'
 
 const Header = () => {
   const dispatch = useAppDispatch()
-  const user = useTypedSelector(state => state.auth.user)
   const navigate = useNavigate()
+
+  const isAuth = useTypedSelector(isUserAuthenticated)
+  const userName = useTypedSelector(getUserName)
+
   useEffect(() => {
-    if (user && user.token) {
+    if (isAuth) {
       return navigate(routes.Home)
     }
-  }, [user])
+  }, [isAuth])
 
   const logoutHandler = () => {
     dispatch(logout())
@@ -26,10 +34,10 @@ const Header = () => {
       </h1>
       <nav>
         <ul className='header__list'>
-          {user && user.token ? (
+          {isAuth ? (
             <>
               <li className='header__item'>
-                <Link to={routes.MyMeetups}>Мои митапы ({user.name})</Link>
+                <Link to={routes.MyMeetups}>Мои митапы ({userName})</Link>
               </li>
               <li className='header__item'>
                 <Link to={routes.Organized}>Организуемые митапы</Link>

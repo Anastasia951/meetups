@@ -13,7 +13,6 @@ export const getMeetupById = async (req, res) => {
   try {
     const { id } = req.query
     const meetup = await MeetupModel.findById(id).populate('owner').exec()
-    console.log(meetup)
     res.json(meetup)
   } catch (e) {
     console.log(e.message)
@@ -23,8 +22,7 @@ export const getMeetupById = async (req, res) => {
 
 export const createMeetup = async (req, res) => {
   try {
-    let { title, date, place, description, program, owner } = req.body
-    if (!Array.isArray(program) || !program.length) program = []
+    let { title, date, place, description, owner } = req.body
 
     const newMeetup = new MeetupModel({
       owner,
@@ -32,7 +30,6 @@ export const createMeetup = async (req, res) => {
       date,
       place,
       description,
-      program
     })
     const meetup = await newMeetup.save()
     res.json(meetup)

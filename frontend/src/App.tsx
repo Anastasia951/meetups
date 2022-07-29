@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { Footer, Header } from './components'
 import { routes } from './constants/routes'
@@ -17,7 +17,6 @@ import { useAppDispatch } from './redux/store'
 
 function App() {
   const dispatch = useAppDispatch()
-
   useEffect(() => {
     dispatch(fetchAllMeetups())
     dispatch(fetchMe())
