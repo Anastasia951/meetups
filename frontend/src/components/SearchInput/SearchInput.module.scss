@@ -1,0 +1,11 @@
+.form {
+  display: flex;
+  align-items: center;
+  .searchInput {
+    padding-left: 40px;
+    border-radius: 20px;
+  }
+  .searchIcon {
+    transform: translateX(calc(100% + 10px));
+  }
+}

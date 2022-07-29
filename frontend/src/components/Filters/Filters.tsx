@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react'
-import SearchIcon from '@mui/icons-material/Search'
 import './Filters.scss'
+import SearchInput from '../SearchInput/SearchInput'
 
 const Filters = () => {
   const [active, setActive] = useState(0)
@@ -20,10 +20,7 @@ const Filters = () => {
           )
         })}
       </ul>
-      <form>
-        <SearchIcon className='search-icon' />
-        <input type='text' placeholder='Поиск' />
-      </form>
+      <SearchInput />
     </div>
   )
 }

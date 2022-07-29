@@ -1,15 +1,32 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { routes } from '../../constants/routes'
-import { selectIsAuth, useAuthSelector } from '../../redux/slices/authSlice'
-
+import { logout } from '../../redux/slices/authSlice'
+import {
+  getUserName,
+  isUserAuthenticated,
+  useAppDispatch,
+  useTypedSelector,
+} from '../../redux/store'
 import './Header.scss'
 
 const Header = () => {
-  const user = useAuthSelector(state => state.auth.user)
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
-  console.log('isAuth', user)
+  const isAuth = useTypedSelector(isUserAuthenticated)
+  const userName = useTypedSelector(getUserName)
+
+  useEffect(() => {
+    if (isAuth) {
+      return navigate(routes.Home)
+    }
+  }, [isAuth])
+
+  const logoutHandler = () => {
+    dispatch(logout())
+    return navigate(routes.Home)
+  }
   return (
     <header className='header'>
       <h1 className='header__title'>
@@ -17,31 +34,28 @@ const Header = () => {
       </h1>
       <nav>
         <ul className='header__list'>
-          {user && user.auth.user.token ? (
+          {isAuth ? (
+            <>
+              <li className='header__item'>
+                <Link to={routes.MyMeetups}>Мои митапы ({userName})</Link>
+              </li>
+              <li className='header__item'>
+                <Link to={routes.Organized}>Организуемые митапы</Link>
+              </li>
+              <li className='header__item'>
+                <Link to={routes.CreateMeetup}>Создать митап</Link>
+              </li>
+              <li onClick={logoutHandler} className='header__item'>
+                Выйти
+              </li>
+            </>
+          ) : (
             <>
               <li className='header__item'>
                 <Link to={routes.Login}>Вход</Link>
               </li>
               <li className='header__item'>
                 <Link to={routes.Register}>Регистрация</Link>
-              </li>
-              <li className='header__item'>
-                <Link to={routes.CreateMeetup}>Создать митап</Link>
-              </li>
-            </>
-          ) : (
-            <>
-              <li className='header__item'>
-                <Link to={routes.Login}>Мои митапы</Link>
-              </li>
-              <li className='header__item'>
-                <Link to={routes.Register}>Организуемые митапы</Link>
-              </li>
-              <li className='header__item'>
-                <Link to={routes.Register}>Создать митап</Link>
-              </li>
-              <li className='header__item'>
-                <Link to={routes.Register}>Выйти</Link>
               </li>
             </>
           )}
@@ -51,4 +65,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default React.memo(Header)

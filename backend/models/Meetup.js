@@ -22,30 +22,6 @@ const MeetupSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  program: [
-    {
-      meaning: {
-        type: String,
-        required: true,
-      },
-      beginsAt: {
-        type: String,
-        required: true,
-      },
-      endsAt: {
-        type: String,
-        required: true,
-      },
-      title: {
-        type: String,
-        required: true,
-      },
-      description: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
 })
 
 export default mongoose.model('Meetup', MeetupSchema)
