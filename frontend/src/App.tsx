@@ -8,7 +8,7 @@ import {
   CreateMeetup,
   Home,
   MyMeetups,
-  Organized,
+  // Organized,
   MeetupById,
 } from './pages'
 import { fetchMe } from './redux/slices/authSlice'
@@ -31,7 +31,7 @@ function App() {
           <Route path={routes.Register} element={<Register />} />
           <Route path={routes.CreateMeetup} element={<CreateMeetup />} />
           <Route path={routes.MyMeetups} element={<MyMeetups />} />
-          <Route path={routes.Organized} element={<Organized />} />
+          {/* <Route path={routes.Organized} element={<Organized />} /> */}
           <Route path={routes.MeetupById + '/:id'} element={<MeetupById />} />
         </Routes>
       </main>

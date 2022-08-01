@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { TypedUseSelectorHook, useSelector } from 'react-redux'
 import { instance } from '../../axios'
+import { IUser } from '../../constants'
 import { RootState } from '../store'
 
 enum Status {
@@ -8,7 +9,11 @@ enum Status {
   Loaded = 'loaded',
   Error = 'error',
 }
-const initialState = {
+interface IState {
+  status: Status
+  user: IUser
+}
+const initialState: IState = {
   status: Status.Loading,
   user: null,
 }
@@ -16,20 +21,20 @@ const initialState = {
 export const fetchRegister = createAsyncThunk(
   'user/fetchRegister',
   async (params: any) => {
-    const data = await instance.post('/register', params)
-    return data.data
+    const { data } = await instance.post('/register', params)
+    return data
   }
 )
 export const fetchLogin = createAsyncThunk(
   'user/fetchLogin',
   async (params: any) => {
-    const data = await instance.post('/login', params)
-    return data.data
+    const { data } = await instance.post('/login', params)
+    return data
   }
 )
 export const fetchMe = createAsyncThunk('user/fetchMe', async () => {
-  const data = await instance.get('/auth/me')
-  return data.data
+  const { data } = await instance.get('/auth/me')
+  return data
 })
 const authSlice = createSlice({
   name: 'auth',

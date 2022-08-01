@@ -7,6 +7,7 @@ export interface IMeetup {
 }
 
 export interface IUser {
+  _id: string
   email: string
   token?: string
   passwordHash: string

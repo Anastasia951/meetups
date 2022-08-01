@@ -39,9 +39,9 @@ const Header = () => {
               <li className='header__item'>
                 <Link to={routes.MyMeetups}>Мои митапы ({userName})</Link>
               </li>
-              <li className='header__item'>
+              {/* <li className='header__item'>
                 <Link to={routes.Organized}>Организуемые митапы</Link>
-              </li>
+              </li> */}
               <li className='header__item'>
                 <Link to={routes.CreateMeetup}>Создать митап</Link>
               </li>
